@@ -1,0 +1,494 @@
+{
+  "openapi":"3.0.0",
+  "info":{
+    "description":"curl function for product & category",
+    "version":"1.0.0",
+    "title":"Dozzanz task"
+  },
+  "tags":[
+    {
+      "name":"Product",
+      "description":"Operations about your Product"
+    },
+    {
+      "name":"Category",
+      "description":"Operations about your Category"
+    }
+  ],
+  "paths":{
+    "/Products/":{
+      "post":{
+        "tags":[
+          "product"
+        ],
+        "summary":"Create new product",
+        "operationId":"addProduct",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "$ref":"#/components/schemas/product"
+              }
+            }
+          },
+          "description":"all data the product need to create record in database",
+          "required":true
+        },
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/product"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Invalid Request!"
+          }
+        }
+      }
+    },
+    "/Products/{prod_id}":{
+      "get":{
+        "tags":[
+          "product"
+        ],
+        "summary":"Get one Product with specified ID",
+        "operationId":"GetOneProduct",
+        "parameters":[
+          {
+            "name":"prod_id",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type": "string"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "items":{
+                    "$ref":"#/components/schemas/product"
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Invalid Request!"
+          }
+        }
+      },
+      "put":{
+        "tags":[
+          "product"
+        ],
+        "summary":"Update an existing product",
+        "operationId":"updateProduct",
+        "parameters":[
+          {
+            "in":"path",
+            "name":"prod_id",
+            "description":"the id of the product ",
+            "required":true,
+            "schema":{
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "$ref":"#/components/schemas/product"
+              }
+            }
+          },
+          "description":"all data ",
+          "required":true
+        },
+        "responses":{
+          "202":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "items":{
+                    "$ref":"#/components/schemas/product"
+                  }
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Invalid ID supplied"
+          },
+          "404":{
+            "description":"product not found"
+          }
+        }
+      },
+      "delete":{
+            "tags":[
+              "product"
+            ],
+            "summary":"delete an exist product",
+            "operationId":"deleteProductByID",
+            "parameters":[
+              {
+                "name":"prod_id",
+                "in":"path",
+                "required":true,
+                "schema":{
+                  "type": "string"
+                }
+              }
+            ],
+            "responses":{
+              "200":{
+                "description":"Product successfuly suspend"
+              },
+              "404":{
+                "description":"Not found."
+              }
+          }
+        }
+    },
+    "/Products/GetAll/page/{page_num}":{
+      "get":{
+        "tags":[
+          "product"
+        ],
+        "summary":"Get all Products",
+        "operationId":"GetAllProducts",
+        "parameters":[
+          {
+            "name":"page_num",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type":"integer"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Products/GetAllActice/page/{page_num}":{
+      "get":{
+        "tags":[
+          "product"
+        ],
+        "summary":"Get all Active Products",
+        "operationId":"ProductGetAllActice",
+        "parameters":[
+          {
+            "name":"page_num",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type":"integer"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/Category/":{
+      "post":{
+        "tags":[
+          "Category"
+        ],
+        "summary":"Create new Category",
+        "operationId":"addCategory",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "$ref":"#/components/schemas/category"
+              }
+            }
+          },
+          "description":"all data the Category need to create record in database",
+          "required":true
+        },
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/category"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Invalid Request!"
+          }
+        }
+      }
+      },
+    "/Category/{cat_id}":{
+        "get":{
+        "tags":[
+          "Category"
+        ],
+        "summary":"get the data of Category",
+        "operationId":"findCategoryByID",
+        "parameters":[
+          {
+            "name":"cat_id",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type": "string"
+             }
+          }
+        ],
+        "responses":{
+          "200":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type":"object",
+                  "items":{
+                    "$ref":"#/components/schemas/category"
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Not found."
+          }
+        }
+      },
+        "delete":{
+            "tags":[
+              "Category"
+            ],
+            "summary":"delete an exist category",
+            "operationId":"deleteCategoryByID",
+            "parameters":[
+              {
+                "name":"cat_id",
+                "in":"path",
+                "required":true,
+                "schema":{
+                  "type": "string"
+                }
+              }
+            ],
+            "responses":{
+              "200":{
+                "description":"Category successfuly suspend"
+              },
+              "404":{
+                "description":"Not found."
+              }
+          }
+        },
+        "put":{
+          "tags":[
+            "Category"
+          ],
+          "summary":"Update an existing Category",
+          "operationId":"updateCategory",
+          "parameters":[
+            {
+              "in":"path",
+              "name":"cat_id",
+              "description":"the id of the Category ",
+              "required":true,
+              "schema":{
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/category"
+                }
+              }
+            },
+            "description":"all data ",
+            "required":true
+          },
+          "responses":{
+            "202":{
+              "description":"successful operation",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"object",
+                    "items":{
+                      "$ref":"#/components/schemas/category"
+                    }
+                  }
+                }
+              }
+            },
+            "404":{
+              "description":"Not found."
+            }
+          }
+        }
+      },
+    "/Category/GetAll/page/{page_num}":{
+        "get":{
+        "tags":[
+          "Category"
+        ],
+        "summary":"Get All Category",
+        "operationId":"GetAllCategory",
+        "parameters":[
+          {
+            "name":"page_num",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type":"integer"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/category"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Invalid input"
+          }
+        }
+      },
+    },
+    "/Category/GetAllActice/page/{page_num}":{
+        "get":{
+        "tags":[
+          "Category"
+        ],
+        "summary":"Get All Actice Category",
+        "operationId":"CategoryGetAllActice",
+        "parameters":[
+          {
+            "name":"page_num",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type":"integer"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful operation",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/category"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Invalid input"
+          }
+        }
+      },
+    }
+    },
+  "servers":[
+    {
+      "url":"/"
+    },
+    {
+      "url":"http://localhost/"
+    }
+  ],
+  "components":{
+    "schemas":{
+      "product":{
+        "type":"object",
+        "properties":{
+            "ProductID":{
+              "type":"UUID"
+            },
+            "ProductCode":{
+              "type":"string"
+            },
+            "ProductName":{
+              "type":"string"
+            },
+            "ProductPrice":{
+              "type":"number"
+            },
+            "ProductAvailableQuantity":{
+              "type":"integer"
+            },
+            "ProductCategoryID":{
+              "type":"UUID"
+            },
+            "ProductActive":{
+              "type":"boolean"
+            }
+          }
+      },
+
+      "category":{
+        "type":"object",
+        "properties":{
+            "CategoryID":{
+              "type":"UUID"
+            },
+            "CategoryName":{
+              "type":"string"
+            },
+            "CategoryActive":{
+              "type":"boolean"
+            }
+        }
+      }
+    }
+ }
+}
