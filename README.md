@@ -12,4 +12,4 @@
 # • Same category can be assigned to unlimited products  
 # • Deleting a category is possible all the time, yet it should not delete products 
 # Swagger documentation open with url : 
-#     localhost/api-doc/
+#     http://127.0.0.1:8000/api-doc/
